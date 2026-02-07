@@ -1,14 +1,136 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alfred's Sample Landing Page</title>
+    <title>Daily Countdown to Noon (12 PM) - Alfred</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff; /* Alice Blue */
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        #countdown {
+            font-size: 4em;
+            font-weight: bold;
+            color: #e74c3c; /* Alizarin */
+            background-color: #fff;
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e74c3c;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        #message {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #34495e; /* Wet Asphalt */
+        }
+
+        footer {
+            margin-top: auto;
+            padding-top: 20px;
+            color: #7f8c8d; /* Asbestos */
+            font-size: 0.9em;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            to {
+                transform: scale(1.02);
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            #countdown {
+                font-size: 3em;
+                padding: 20px 30px;
+            }
+            #message {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            #countdown {
+                font-size: 2.5em;
+                padding: 15px 20px;
+            }
+            #message {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello from Alfred!</h1>
-    <p>This is a sample landing page pushed by Alfred to your GitHub repository.</p>
+    <h1>Time Remaining Until 12 PM Noon Daily</h1>
+    <div id="countdown"></div>
+    <div id="message"></div>
+
+    <footer>
+        <p>Created by Alfred</p>
+    </footer>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            let noon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0, 0);
+
+            // If it's already past noon, set the countdown for noon tomorrow
+            if (now.getTime() > noon.getTime()) {
+                noon.setDate(noon.getDate() + 1);
+            }
+
+            const timeLeft = noon.getTime() - now.getTime();
+
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML =
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft < 0) {
+                // This shouldn't happen with the logic above, but as a fallback
+                document.getElementById('countdown').innerHTML = "00:00:00";
+                document.getElementById('message').innerHTML = "It's past noon! Counting down to tomorrow.";
+            } else {
+                document.getElementById('message').innerHTML = "until 12 PM today!";
+            }
+        }
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Initial call to display immediately
+        updateCountdown();
+    </script>
 </body>
 </html>
-
