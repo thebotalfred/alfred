@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Set generation timestamp
     if (generationTimestampSpan) {
-        generationTimestampSpan.textContent = new Date().toLocaleString();
+        generationTimestampSpan.textContent = new Date().toLocaleString('he-IL');
     }
 
     // Function to generate random number between 1 and 6
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             5: [[1, 1], [1, 3], [2, 2], [3, 1], [3, 3]],
             6: [[1, 1], [1, 3], [2, 1], [2, 3], [3, 1], [3, 3]]
         };
+        // Use a loop to create dots for each position
         dotPositions[value].forEach(pos => {
             const dot = document.createElement('div');
             dot.classList.add('dot');
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     rollButton.addEventListener('click', () => {
         rollButton.disabled = true; // Disable button during roll
-        resultDiv.textContent = 'Rolling...';
+        resultDiv.textContent = 'מטיל קוביות...'; // Hebrew for "Rolling..."
 
         die1.classList.add('rolling');
         die2.classList.add('rolling');
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateDie(die1, value1);
                 updateDie(die2, value2);
 
-                resultDiv.textContent = `You rolled: ${value1} and ${value2} (Total: ${value1 + value2})`;
+                resultDiv.textContent = `הטלת: ${value1} ו-${value2} (סה"כ: ${value1 + value2})`; // Hebrew for "You rolled: X and Y (Total: Z)"
                 rollButton.disabled = false; // Re-enable button
             }
         }, 100);

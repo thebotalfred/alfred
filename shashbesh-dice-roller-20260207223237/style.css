@@ -9,6 +9,7 @@ body {
     background-color: #2c3e50; /* Dark background */
     color: #ecf0f1; /* Light text */
     text-align: center;
+    direction: rtl; /* For Hebrew text */
 }
 
 .container {
@@ -108,6 +109,8 @@ button:active {
     margin-top: 20px;
     font-size: 1.5em;
     color: #f1c40f;
+    max-width: 180px; /* Constrain width to dice container */
+    overflow-wrap: break-word; /* Break long words */
 }
 
 footer {
