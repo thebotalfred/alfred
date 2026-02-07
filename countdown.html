@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Countdown to Noon (12 PM) - Alfred</title>
+    <title>Daily Countdown to Midnight - Alfred</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,35 +13,39 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f0f8ff; /* Alice Blue */
-            color: #333;
+            background-color: #0d1a26; /* Dark Blue/Midnight */
+            color: #ecf0f1; /* Light Gray */
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
+            background-image: linear-gradient(to bottom, #0d1a26, #2c3e50); /* Subtle gradient */
         }
 
         h1 {
-            color: #2c3e50;
+            color: #ffffff;
             margin-bottom: 20px;
-            font-size: 2.5em;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         #countdown {
-            font-size: 4em;
+            font-size: 5em;
             font-weight: bold;
-            color: #e74c3c; /* Alizarin */
-            background-color: #fff;
-            padding: 30px 50px;
+            color: #f1c40f; /* Sunflower Yellow */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 30px 60px;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e74c3c;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid #f1c40f;
             animation: pulse 1.5s infinite alternate;
+            letter-spacing: 3px;
         }
 
         #message {
             margin-top: 30px;
-            font-size: 1.5em;
-            color: #34495e; /* Wet Asphalt */
+            font-size: 1.8em;
+            color: #bdc3c7; /* Silver */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         footer {
@@ -54,61 +58,64 @@
         @keyframes pulse {
             from {
                 transform: scale(1);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             }
             to {
                 transform: scale(1.02);
-                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
             }
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
             #countdown {
-                font-size: 3em;
+                font-size: 4em;
+                padding: 25px 40px;
+            }
+            #message {
+                font-size: 1.4em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            #countdown {
+                font-size: 3.5em;
                 padding: 20px 30px;
             }
             #message {
                 font-size: 1.2em;
             }
         }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5em;
-            }
-            #countdown {
-                font-size: 2.5em;
-                padding: 15px 20px;
-            }
-            #message {
-                font-size: 1em;
-            }
-        }
     </style>
 </head>
 <body>
-    <h1>Time Remaining Until 12 PM Noon Daily</h1>
+    <h1>Time Remaining Until Midnight</h1>
     <div id="countdown"></div>
     <div id="message"></div>
 
     <footer>
-        <p>Created by Alfred</p>
+        <p>Created by Alfred - Generated: <span id="generation-timestamp"></span></p>
     </footer>
 
     <script>
+        // Update footer generation timestamp
+        document.getElementById('generation-timestamp').textContent = new Date().toLocaleString();
+
         function updateCountdown() {
             const now = new Date();
-            let noon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0, 0);
+            let midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24, 0, 0, 0); // 24:00:00 is midnight
 
-            // If it's already past noon, set the countdown for noon tomorrow
-            if (now.getTime() > noon.getTime()) {
-                noon.setDate(noon.getDate() + 1);
+            // If it's already past midnight (e.g., 00:01 AM), set the countdown for midnight tonight
+            if (now.getTime() > midnight.getTime()) {
+                midnight.setDate(midnight.getDate() + 1);
             }
 
-            const timeLeft = noon.getTime() - now.getTime();
+            const timeLeft = midnight.getTime() - now.getTime();
 
             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
@@ -118,11 +125,11 @@
                 `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
             if (timeLeft < 0) {
-                // This shouldn't happen with the logic above, but as a fallback
+                // Should not happen with the logic above, but as a fallback
                 document.getElementById('countdown').innerHTML = "00:00:00";
-                document.getElementById('message').innerHTML = "It's past noon! Counting down to tomorrow.";
+                document.getElementById('message').innerHTML = "It's past midnight! Counting down to tomorrow.";
             } else {
-                document.getElementById('message').innerHTML = "until 12 PM today!";
+                document.getElementById('message').innerHTML = "until Midnight tonight!";
             }
         }
 
