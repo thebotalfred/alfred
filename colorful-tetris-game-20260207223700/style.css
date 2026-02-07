@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    font-family: 'Press Start 2P', cursive; /* Using a retro font if available */
+    color: #fff;
+    overflow: hidden;
+}
+
+#game-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+    text-align: center;
+    border: 2px solid #0ff;
+}
+
+h1 {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
+    margin-bottom: 20px;
+}
+
+canvas {
+    border: 5px solid #0ff;
+    background-color: #1a1a1a;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+#score-display {
+    margin-top: 15px;
+    font-size: 1.5em;
+    color: #f0f;
+    text-shadow: 0 0 8px #f0f;
+}
+
+#startButton {
+    background-color: #0f0;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 0 10px #0f0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#startButton:hover {
+    background-color: #0afa0a;
+    box-shadow: 0 0 15px #0f0;
+}
+
+/* Optional: Import a retro font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
