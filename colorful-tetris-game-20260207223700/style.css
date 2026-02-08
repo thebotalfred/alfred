@@ -1,13 +1,16 @@
 body {
     margin: 0;
     display: flex;
+    flex-direction: column; /* Allow vertical stacking */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(to right, #6a11cb, #2575fc);
     font-family: 'Press Start 2P', cursive; /* Using a retro font if available */
     color: #fff;
-    overflow: hidden;
+    overflow-y: auto; /* Allow vertical scrolling on smaller screens */
+    padding: 10px; /* Add some padding around the edges */
+    box-sizing: border-box; /* Include padding in element's total width and height */
 }
 
 #game-container {
@@ -17,12 +20,15 @@ body {
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
     text-align: center;
     border: 2px solid #0ff;
+    width: fit-content; /* Adjust width to content */
+    max-width: 100%; /* Ensure it doesn't overflow */
 }
 
 h1 {
     color: #0ff;
     text-shadow: 0 0 10px #0ff;
     margin-bottom: 20px;
+    font-size: 2.5em; /* Default large size */
 }
 
 canvas {
@@ -31,6 +37,8 @@ canvas {
     display: block;
     margin: 0 auto;
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    max-width: 100%; /* Ensure canvas scales down */
+    height: auto; /* Maintain aspect ratio */
 }
 
 #score-display {
@@ -52,11 +60,55 @@ canvas {
     margin-top: 20px;
     box-shadow: 0 0 10px #0f0;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: auto; /* Allow button to size naturally */
+    min-width: 150px; /* Ensure a minimum size */
 }
 
 #startButton:hover {
     background-color: #0afa0a;
     box-shadow: 0 0 15px #0f0;
+}
+
+footer {
+    margin-top: 20px; /* Add margin to separate from game */
+    padding-top: 10px;
+    color: #7f8c8d; /* Asbestos */
+    font-size: 0.8em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    #score-display {
+        font-size: 1.2em;
+    }
+    #startButton {
+        font-size: 1em;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    #game-container {
+        padding: 15px;
+    }
+    canvas {
+        /* Canvas width is 300px, if screen is smaller, scale it */
+        width: 100%; /* Make canvas take full width of container */
+        height: auto; /* Height will adjust automatically */
+    }
+    #score-display {
+        font-size: 1em;
+    }
+    #startButton {
+        font-size: 0.9em;
+        padding: 7px 12px;
+    }
 }
 
 /* Optional: Import a retro font from Google Fonts */

@@ -2,6 +2,12 @@ const canvas = document.getElementById('tetrisCanvas');
 const ctx = canvas.getContext('2d');
 const scoreDisplay = document.getElementById('score-display');
 const startButton = document.getElementById('startButton');
+const generationTimestampSpan = document.getElementById('generation-timestamp'); // Get the span
+
+// Set generation timestamp
+if (generationTimestampSpan) {
+    generationTimestampSpan.textContent = new Date().toLocaleString();
+}
 
 const ROWS = 20;
 const COLS = 10;
